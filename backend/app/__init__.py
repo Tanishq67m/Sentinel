@@ -12,7 +12,7 @@ def create_app(config_object: str = "config.DevelopmentConfig") -> Flask:
     app = Flask(__name__)
     app.config.from_object(config_object)
 
-    CORS(app, resources={r"/api/*": {"origins": "*"}})
+    CORS(app)
 
     db.init_app(app)
     with app.app_context():
