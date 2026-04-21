@@ -32,6 +32,15 @@ Without an audit trail, failures are a mystery. Every time the deployment transi
 
 ---
 
+## ⚖️ Architecture Tradeoffs & Expansion Limits
+
+To optimize for simplicity and structural clarity within this assessment, the following architectural tradeoffs were explicitly made:
+
+1. **Database Selection (SQLite vs PostgreSQL):** We adopted SQLite to remove external dependency configuration (Docker, Cloud Postgres) and ensure absolute ease-of-use for reviewers. While perfect for this zero-config setup, it creates a single-node failure point and concurrency locking if scaled horizontally. The SQLAlchemy ORM we implemented allows dropping in Postgres instantly simply by changing the connection string.
+2. **Synchronous Engine vs Asynchronous Queues:** The `DeploymentService` state transitions occur synchronously within the API lifecycle. This guarantees instantaneous HTTP feedback but is a bottleneck for heavily delayed external integrations. For a massive enterprise setup, we would decouple the `PolicyEngine` into an asynchronous worker (e.g., Celery) and return a strict `202 ACCEPTED / VALIDATING` state while websocketing updates to the UI.
+
+---
+
 ## ⚙️ The Policy Engine Ruleset
 Under the hood, Sentinel enforces the following example business constraints concurrently:
 1. **Corporate Identity:** The request must originate from an authorized corporate email domain (`@company.com`). Generic emails (`@gmail.com`) are forcibly rejected.
@@ -43,6 +52,7 @@ Under the hood, Sentinel enforces the following example business constraints con
 
 ## 💻 Tech Stack
 - **Backend**: Python, Flask, Pydantic, SQLite3 (for ACID-compliant state storage).
+- **Verification**: PyTest automated suite verifying Policy Engine constraints.
 - **Frontend**: React.js, Vite, TypeScript, Custom CSS.
 - **Design Paradigm**: High-Contrast Editorial Brutalism & Tactile Interfaces.
 
