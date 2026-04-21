@@ -1,0 +1,14 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.DS_Store
+
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+instance/
+.pytest_cache/
