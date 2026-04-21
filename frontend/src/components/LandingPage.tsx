@@ -1,5 +1,3 @@
-import React from 'react';
-
 export function LandingPage({ onDashboardLaunch }: { onDashboardLaunch: () => void }) {
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto', padding: '120px 40px', display: 'flex', flexDirection: 'column', gap: '120px' }}>

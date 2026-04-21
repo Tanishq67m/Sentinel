@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuditLog } from '../hooks/useAuditLog';
 import { StatusBadge } from './StatusBadge';
 

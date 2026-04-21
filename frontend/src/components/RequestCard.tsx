@@ -1,4 +1,3 @@
-import React from 'react';
 import { DeploymentRequest } from '../types';
 import { StatusBadge } from './StatusBadge';
 

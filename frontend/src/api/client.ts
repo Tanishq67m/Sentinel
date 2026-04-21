@@ -1,6 +1,6 @@
 import { ApiResponse, CreateDeploymentPayload, DeploymentRequest } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '';
+const API_BASE = (import.meta as any).env.VITE_API_BASE_URL || '';
 
 export const apiClient = {
   getDeployments: async (): Promise<ApiResponse<DeploymentRequest[]>> => {

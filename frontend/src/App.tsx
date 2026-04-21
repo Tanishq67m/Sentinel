@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useDeployments } from './hooks/useDeployments';
 import { DeploymentForm } from './components/DeploymentForm';
 import { RequestCard } from './components/RequestCard';
